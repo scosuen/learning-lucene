@@ -61,12 +61,12 @@ public class MainTest {
 	public void test2() throws ParseException, IOException, InterruptedException, ExecutionException {
 		ExecutorService es = Executors.newCachedThreadPool();
 		CompletionService<String> completionServcie = new ExecutorCompletionService<String>(es);
-		int threads = 500;
+		int threads = 50;
 
 		for (int t = 0 ; t < threads ; t++) {
 			completionServcie.submit(() -> {
 				System.out.println("Ying Thread " + Thread.currentThread().getName() + " is running.");
-				for (int i = 0; i < 1000; i++) {
+				for (int i = 0; i < 100; i++) {
 					try {
 						indexer.indexFile(new File() {
 							{
@@ -78,6 +78,7 @@ public class MainTest {
 						e.printStackTrace();
 					}
 				}
+//				indexer.close();
 				
 				return Thread.currentThread().getName();
 			});
@@ -99,7 +100,7 @@ public class MainTest {
 
 		int count = 0;
 		for (File file : files) {
-			System.out.println(count ++ + ", " + file.getTitle());
+//			System.out.println(count ++ + ", " + file.getTitle());
 		}
 	}
 
