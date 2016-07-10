@@ -10,6 +10,7 @@ import org.apache.lucene.document.FieldType;
 import org.apache.lucene.index.IndexOptions;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.index.IndexWriterConfig.OpenMode;
 
 import com.ying.learning_lucene.test1.File;
 
@@ -36,7 +37,9 @@ public class Indexer {
 			synchronized (indexWriterMap) {
 				if (indexWriterMap.get(indexName) == null) {
 					if (IndexName.RAM.equals(indexName)) {
-						indexWriterMap.put(IndexName.RAM, new IndexWriter(IndexDirectoryProvider.getDirectory(indexName), new IndexWriterConfig(AnalyzerProvider.getAnalyzer())));
+						IndexWriterConfig indexWriterConfig = new IndexWriterConfig(AnalyzerProvider.getAnalyzer());
+						indexWriterConfig.setOpenMode(OpenMode.CREATE_OR_APPEND);
+						indexWriterMap.put(IndexName.RAM, new IndexWriter(DirectoryProvider.getDirectory(indexName), indexWriterConfig));
 					}
 				}
 			}
@@ -91,4 +94,5 @@ public class Indexer {
 		if (indexWriter != null)
 			indexWriter.close();
 	}
+	
 }

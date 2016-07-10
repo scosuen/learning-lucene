@@ -9,11 +9,11 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.RAMDirectory;
 
-public class IndexDirectoryProvider {
+public class DirectoryProvider {
 
 	private static volatile Map<IndexName, Directory> DIRECTORY_NAME = new HashMap<IndexName, Directory>();
 
-	private IndexDirectoryProvider() { }
+	private DirectoryProvider() { }
 
 	public static Directory getDirectory (IndexName indexName) throws IOException {
 		if (DIRECTORY_NAME.get(indexName) == null) {

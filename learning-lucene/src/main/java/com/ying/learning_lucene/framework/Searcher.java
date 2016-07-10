@@ -31,7 +31,7 @@ public class Searcher {
 		if (indexSearcherMap.get(indexName) == null) {
 			synchronized (indexSearcherMap) {
 				if (indexSearcherMap.get(indexName) == null) {
-					Directory directory = IndexDirectoryProvider.getDirectory(indexName);
+					Directory directory = DirectoryProvider.getDirectory(indexName);
 					if (directory == null)
 						return null;
 					indexSearcherMap.put(indexName, new IndexSearcher(DirectoryReader.open(directory)));
